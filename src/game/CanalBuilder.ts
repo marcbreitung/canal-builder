@@ -24,6 +24,16 @@ export class CanalBuilder {
         this.assetsManager = new AssetsManager(this.scene);
     }
 
+    public buildScene() {
+        let camera = new ArcRotateCamera("Camera", Math.PI, -Math.PI, 50, new Vector3(0, 0, 0), this.scene);
+        camera.attachControl(this.canvas, true);
+
+        let light = new HemisphericLight("light1", new Vector3(0, 100, 0), this.scene);
+        light.intensity = 0.5;
+
+        this.loadMesh();
+    }
+
     public loadMesh() {
         let meshTask = this.assetsManager.addMeshTask("Tile Task", "", "/assets/", "tile_a.babylon");
         meshTask.onSuccess = (task) => {
@@ -35,23 +45,6 @@ export class CanalBuilder {
             task.loadedMeshes[0].material = material;
         };
         this.assetsManager.load();
-    }
-
-    public buildScene() {
-        let camera = new ArcRotateCamera("Camera", Math.PI, -Math.PI, 50, new Vector3(0, 0, 0), this.scene);
-        camera.attachControl(this.canvas, true);
-
-        let light = new HemisphericLight("light1", new Vector3(0, 100, 0), this.scene);
-        light.intensity = 0.5;
-
-        let material = new GridMaterial("grid", this.scene);
-        material.majorUnitFrequency = 1;
-        material.minorUnitVisibility = 0.45;
-        material.gridRatio = 0.3;
-        material.mainColor = new Color3(1.0, 1.0, 1.0);
-        material.lineColor = new Color3(0.0, 1.0, 0.0);
-
-        this.loadMesh();
     }
 
     public runRenderLoop() {
