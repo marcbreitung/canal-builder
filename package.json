@@ -13,6 +13,8 @@
   "license": "ISC",
   "devDependencies": {
     "@babylonjs/core": "^4.0.3",
+    "@babylonjs/gui": "^4.0.3",
+    "@babylonjs/inspector": "^4.0.3",
     "@babylonjs/materials": "^4.0.3",
     "clean-webpack-plugin": "^2.0.2",
     "copy-webpack-plugin": "^5.0.3",
@@ -24,5 +26,6 @@
     "webpack": "^4.32.2",
     "webpack-cli": "^3.3.2",
     "webpack-dev-server": "^3.4.1"
-  }
+  },
+  "dependencies": {}
 }
