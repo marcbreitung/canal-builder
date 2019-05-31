@@ -187,7 +187,7 @@ export class CanalBuilder {
     }
 
     private getRandomTile() {
-        let tile = this.tileRandomPrototypes[Tools.getRandomIntInclusive(0, 2)].createInstance("tile_" + this.tiles.length);
+        let tile = this.tileRandomPrototypes[Tools.getRandomIntInclusive(0, 1)].createInstance("tile_" + this.tiles.length);
         tile.parent = this.plane;
         tile.position = new Vector3(0, 0, -0.5);
         this.shadowGenerator.getShadowMap().renderList.push(tile);
