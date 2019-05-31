@@ -4,16 +4,17 @@ import {Color3, Color4, Vector3} from "@babylonjs/core/Maths/math";
 import {ArcRotateCamera} from "@babylonjs/core/Cameras/arcRotateCamera";
 import {Mesh} from "@babylonjs/core/Meshes/mesh";
 import {
+    Axis,
     AbstractMesh,
     AssetsManager,
     HemisphericLight,
     ShadowGenerator,
     SpotLight,
+    Space,
     StandardMaterial
 } from "@babylonjs/core";
 
-import {Button, AdvancedDynamicTexture} from "@babylonjs/gui";
-
+import {AdvancedDynamicTexture, Button} from "@babylonjs/gui";
 import {Tools} from "./Tools";
 
 import "@babylonjs/core/Meshes/meshBuilder";
@@ -38,6 +39,7 @@ export class CanalBuilder {
 
     private startingPoint: Vector3;
     private currentMesh: AbstractMesh;
+    private newTile: AbstractMesh;
 
     constructor(id: string) {
         this.canvas = document.getElementById(id) as HTMLCanvasElement;
@@ -135,6 +137,7 @@ export class CanalBuilder {
 
     private addButton() {
         let advancedTexture = AdvancedDynamicTexture.CreateFullscreenUI("UI");
+
         let addButton = Button.CreateSimpleButton("addButton", "Add new tile");
         addButton.width = "150px";
         addButton.height = "40px";
@@ -145,6 +148,18 @@ export class CanalBuilder {
         addButton.verticalAlignment = 0;
         addButton.onPointerUpObservable.add(() => this.getRandomTile());
         advancedTexture.addControl(addButton);
+
+        let rotateButton = Button.CreateSimpleButton("rotateButton", "Rotate");
+        rotateButton.width = "150px";
+        rotateButton.height = "40px";
+        rotateButton.color = "white";
+        rotateButton.cornerRadius = 0;
+        rotateButton.background = "black";
+        rotateButton.horizontalAlignment = 0;
+        rotateButton.verticalAlignment = 0;
+        rotateButton.top = 50;
+        rotateButton.onPointerUpObservable.add(() => this.rotateTile());
+        advancedTexture.addControl(rotateButton);
     }
 
     private addPlane() {
@@ -177,6 +192,7 @@ export class CanalBuilder {
         tile.position = new Vector3(0, 0, -0.5);
         this.shadowGenerator.getShadowMap().renderList.push(tile);
         this.tiles.push(tile);
+        this.newTile = tile;
     }
 
     private getMaterial() {
@@ -201,6 +217,10 @@ export class CanalBuilder {
         }
 
         return null;
+    }
+
+    private rotateTile() {
+        this.newTile.rotate(Axis.Z, Math.PI / 2, Space.WORLD);
     }
 
     private onPointerDown(event: PointerEvent) {
