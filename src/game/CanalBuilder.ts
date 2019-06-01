@@ -4,6 +4,7 @@ import {Color4, Vector3} from "@babylonjs/core/Maths/math";
 import {ArcRotateCamera} from "@babylonjs/core/Cameras/arcRotateCamera";
 import {Mesh} from "@babylonjs/core/Meshes/mesh";
 import {
+    Animation,
     Axis,
     AbstractMesh,
     AssetsManager,
@@ -40,7 +41,7 @@ export class CanalBuilder {
     private currentMesh: AbstractMesh;
     private newTile: AbstractMesh;
 
-    private increase: number = 1;
+    private increase: number = 0.5;
 
     constructor(id: string) {
         this.canvas = document.getElementById(id) as HTMLCanvasElement;
@@ -172,12 +173,20 @@ export class CanalBuilder {
     }
 
     private getRandomTile() {
+        let tileAnimation = new Animation("tileAnimation", "position.y", 30, Animation.ANIMATIONTYPE_FLOAT, Animation.ANIMATIONLOOPMODE_CYCLE);
+        tileAnimation.setKeys([{frame: 0, value: 5}, {frame: 5, value: this.increase}]);
+
         let tile = this.tileMashes[Tools.getRandomIntInclusive(0, 2)].createInstance("Tile_" + this.tiles.length);
         tile.parent = this.ground;
-        tile.position = new Vector3(0, this.increase, 0);
+        tile.position = new Vector3(0, 0, 0);
+        tile.animations = [];
+        tile.animations.push(tileAnimation);
+
         this.shadowGenerator.getShadowMap().renderList.push(tile);
         this.tiles.push(tile);
         this.newTile = tile;
+
+        this.scene.beginAnimation(tile, 0, 5, false);
     }
 
     private getGroundPosition() {
@@ -210,15 +219,26 @@ export class CanalBuilder {
         });
 
         if (pickInfo.hit) {
+            let tileAnimation = new Animation("tileAnimation", "position.y", 30, Animation.ANIMATIONTYPE_FLOAT, Animation.ANIMATIONLOOPMODE_CYCLE);
+            tileAnimation.setKeys([{frame: 0, value: 0}, {frame: 4, value: this.increase}]);
+
             this.startingPoint = this.getGroundPosition();
             this.currentMesh = pickInfo.pickedMesh;
-            this.currentMesh.position.y = this.increase;
+
+            this.currentMesh.animations.push(tileAnimation);
+            this.scene.beginAnimation(this.currentMesh, 0, 4, false);
         }
     }
 
     private onPointerUp(event: PointerEvent) {
         if (this.startingPoint) {
-            this.currentMesh.position.y = 0;
+
+            let tileAnimation = new Animation("tileAnimation", "position.y", 30, Animation.ANIMATIONTYPE_FLOAT, Animation.ANIMATIONLOOPMODE_CYCLE);
+            tileAnimation.setKeys([{frame: 0, value: this.increase}, {frame: 4, value: 0}]);
+
+            this.currentMesh.animations.push(tileAnimation);
+            this.scene.beginAnimation(this.currentMesh, 0, 4, false);
+
             this.currentMesh = null;
             this.startingPoint = null;
         }
