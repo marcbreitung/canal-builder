@@ -1,10 +1,34 @@
 {"producer":{"name":"Blender","version":"2.79 (sub 0)","exporter_version":"5.6.4","file":"tiles.babylon"},
 "autoClear":true,"clearColor":[0.0509,0.0509,0.0509],"ambientColor":[0,0,0],"gravity":[0,-9.81,0],
-"materials":[{"name":"tiles.Ground","id":"tiles.Ground","ambient":[0.6038,0.4177,0.2291],"diffuse":[0.6038,0.4177,0.2291],"specular":[0,0,0],"emissive":[0,0,0],"specularPower":50,"alpha":1,"backFaceCulling":true,"checkReadyOnlyOnce":false,"maxSimultaneousLights":4},
-{"name":"tiles.Water","id":"tiles.Water","ambient":[0,0.1921,1],"diffuse":[0,0.1537,0.8],"specular":[0.0129,0.0741,0.1369],"emissive":[0,0,0],"specularPower":50,"alpha":1,"backFaceCulling":true,"checkReadyOnlyOnce":false,"maxSimultaneousLights":4}],
-"multiMaterials":[{"name":"tiles.Multimaterial#0","id":"tiles.Multimaterial#0","materials":["tiles.Ground","tiles.Water"]},{"name":"tiles.Multimaterial#1","id":"tiles.Multimaterial#1","materials":["tiles.Ground","tiles.Water"]},{"name":"tiles.Multimaterial#2","id":"tiles.Multimaterial#2","materials":["tiles.Ground","tiles.Water"]}],
+"materials":[{"name":"tiles.Ground.001","id":"tiles.Ground.001","ambient":[0.6038,0.4177,0.2291],"diffuse":[0.6038,0.4177,0.2291],"specular":[0,0,0],"emissive":[0,0,0],"specularPower":50,"alpha":1,"backFaceCulling":true,"checkReadyOnlyOnce":false,"maxSimultaneousLights":4},
+{"name":"tiles.Water","id":"tiles.Water","ambient":[0,0.1921,1],"diffuse":[0,0.1537,0.8],"specular":[0.0129,0.0741,0.1369],"emissive":[0,0,0],"specularPower":50,"alpha":1,"backFaceCulling":true,"checkReadyOnlyOnce":false,"maxSimultaneousLights":4},
+{"name":"tiles.Ground","id":"tiles.Ground","ambient":[0.8,0.8,0.8],"diffuse":[0.64,0.64,0.64],"specular":[0,0,0],"emissive":[0,0,0],"specularPower":1,"alpha":1,"backFaceCulling":true,"checkReadyOnlyOnce":false,"maxSimultaneousLights":4}],
+"multiMaterials":[{"name":"tiles.Multimaterial#0","id":"tiles.Multimaterial#0","materials":["tiles.Ground.001","tiles.Water"]},{"name":"tiles.Multimaterial#1","id":"tiles.Multimaterial#1","materials":["tiles.Ground.001","tiles.Water"]},{"name":"tiles.Multimaterial#2","id":"tiles.Multimaterial#2","materials":["tiles.Ground.001","tiles.Water"]},{"name":"tiles.Multimaterial#3","id":"tiles.Multimaterial#3","materials":["tiles.Ground.001","tiles.Water"]}],
 "skeletons":[],
-"meshes":[{"name":"Tile D","id":"Tile D","materialId":"tiles.Multimaterial#0","billboardMode":0,"position":[0,0,3],"rotation":[0,0,0],"scaling":[1,1,1],"isVisible":true,"freezeWorldMatrix":false,"isEnabled":true,"checkCollisions":false,"receiveShadows":false,"pickable":true,"tags":""
+"meshes":[{"name":"Tile A","id":"Tile A","materialId":"tiles.Multimaterial#0","billboardMode":0,"position":[0,0,-2],"rotation":[0,0,0],"scaling":[1,1,1],"isVisible":true,"freezeWorldMatrix":false,"isEnabled":true,"checkCollisions":false,"receiveShadows":false,"pickable":true,"tags":""
+,"positions":[-0.3333,0,-1,-1,0,-0.3333,-0.3333,0,-0.3333,1,0.5,-0.3333,1,0.25,-1,1,0.25,-0.3333,-1,0.5,1,-0.3333,0.5,0.3333,-0.3333,0.5,1,-1,0.25,-1,-1,0,-1,0.3333,0.5,-1,1,0.5,-1,-1,0.5,-0.3333,-0.3333,0.5,-1,-0.3333,0.5,-0.3333,0.3333,0.5,1
+,1,0.25,1,0.3333,0.25,1,0.3333,0.25,-0.3333,0.3333,0.25,-1,-0.3333,0.25,1,-1,0.25,1,0.3333,0,-1,0.3333,0,1,-0.3333,0,1,1,0,0.3333,1,0,1,-1,0.25,0.3333,-1,0.25,-0.3333,-0.3333,0.25,-0.3333,-0.3333,0.25,0.3333,0.3333,0.5,0.3333,0.3333,0.25,0.3333
+,-1,0,1,-1,0,0.3333,1,0.25,0.3333,1,0,-0.3333,-1,0.5,-1,1,0.5,1,1,0.5,0.3333,-1,0.5,0.3333,1,0,-1,-0.3333,0.25,-1,0.3333,0.5,-0.3333,-0.3333,0,0.3333,0.3333,0,0.3333,0.3333,0,-0.3333,-0.3333,0.25,1,0.3333,0.25,0.3333,0.3333,0.25,1
+,-0.3333,0.25,-0.3333,0.3333,0.25,-0.3333,0.3333,0.25,-1,1,0.25,0.3333,1,0.25,-0.3333,-0.3333,0.25,0.3333,-0.3333,0.25,-1]
+,"normals":[0,-0.707,-0.707,-0.707,-0.707,0,0,-1,0,0.577,0.577,0.577,0.707,0,-0.707,0.905,0.301,0.301,-0.577,0.577,0.577,0.707,0.707,0,0.577,0.577,0.577,-0.707,0,-0.707,-0.577,-0.577,-0.577,-0.577,0.577,-0.577,0.577,0.577,-0.577,-0.707,0.707,0,0.577,0.577,-0.577,0.707,0.707,0,-0.577,0.577,0.577
+,0.707,0,0.707,-0.301,0.301,0.905,-0.301,0.905,0.301,-0.301,0.301,-0.905,0.301,0.301,0.905,-0.707,0,0.707,0,-0.707,-0.707,0,-0.707,0.707,0,-0.707,0.707,0.707,-0.707,0,0.577,-0.577,0.577,-1,0,0,-1,0,0,0.707,0.707,0,0.707,0.707,0,-0.577,0.577,-0.577,-0.301,0.905,-0.301
+,-0.577,-0.577,0.577,-0.707,-0.707,0,0.905,0.301,-0.301,0.707,-0.707,0,-0.577,0.577,-0.577,0.577,0.577,0.577,0.577,0.577,-0.577,-0.707,0.707,0,0.577,-0.577,-0.577,0.301,0.301,-0.905,-0.577,0.577,0.577,0,-1,0,0,-1,0,0,-1,0,0.301,0.301,0.905,-0.301,0.905,-0.301,-0.301,0.301,0.905
+,0.707,0.707,0,-0.301,0.905,0.301,-0.301,0.301,-0.905,0.905,0.301,-0.301,0.905,0.301,0.301,0.707,0.707,0,0.301,0.301,-0.905]
+,"indices":[0,1,2,3,4,5,6,7,8,9,1,10,3,11,12,13,14,15,16,17,18,11,19,20,6,21,22,20,0,23,21,24,25,17,26,27,13,28,29,7,30,31,32,18,33,28,34,35,36,37
+,26,38,29,9,8,31,21,39,32,40,39,36,17,41,22,28,4,23,42,43,10,0,41,15,7,18,27,24,15,43,30,5,42,37,12,20,4,22,25,34,29,35,1,14,9,43,40,33,36,44
+,5,19,45,34,25,2,35,45,27,46,24,46,25,24,26,47,46,46,2,45,37,23,47,23,2,47,0,10,1,3,12,4,6,41,7,9,29,1,3,44,11,13,38,14,16,39,17,11,44,19
+,6,8,21,20,43,0,21,18,24,17,36,26,13,41,28,7,15,30,32,16,18,28,22,34,36,5,37,38,13,29,8,7,31,39,16,32,39,40,36,41,6,22,4,20,23,43,9,10,41,13
+,15,18,17,27,15,14,43,5,4,42,12,11,20,22,21,25,29,28,35,14,38,9,40,32,33,44,3,5,45,35,34,2,1,35,27,26,46,46,45,25,26,37,47,46,47,2,37,42,23,23
+,0,2,48,49,50,49,51,52,51,53,52,54,52,55,48,56,49,49,56,51,51,57,53,54,49,52]
+,"subMeshes":[{"materialIndex":0,"verticesStart":0,"verticesCount":48,"indexStart":0,"indexCount":252},{"materialIndex":1,"verticesStart":48,"verticesCount":10,"indexStart":252,"indexCount":24}]
+,"instances":[]}
+,{"name":"Ground","id":"Ground","materialId":"tiles.Ground","billboardMode":0,"position":[0,0,0],"rotation":[0,0,0],"scaling":[1,1,1],"isVisible":true,"freezeWorldMatrix":false,"isEnabled":true,"checkCollisions":false,"receiveShadows":false,"pickable":true,"tags":""
+,"positions":[-10,0,-10,-10,-0.5,10,-10,-0.5,-10,-10,0,10,10,-0.5,10,10,0,10,10,-0.5,-10,10,0,-10]
+,"normals":[-0.577,0.577,-0.577,-0.577,-0.577,0.577,-0.577,-0.577,-0.577,-0.577,0.577,0.577,0.577,-0.577,0.577,0.577,0.577,0.577,0.577,-0.577,-0.577,0.577,0.577,-0.577]
+,"indices":[0,1,2,3,4,1,5,6,4,7,2,6,4,2,1,3,7,5,0,3,1,3,5,4,5,7,6,7,0,2,4,6,2,3,0,7]
+,"subMeshes":[{"materialIndex":0,"verticesStart":0,"verticesCount":8,"indexStart":0,"indexCount":36}]
+,"instances":[]}
+,{"name":"Tile D","id":"Tile D","materialId":"tiles.Multimaterial#1","billboardMode":0,"position":[0,0,7],"rotation":[0,0,0],"scaling":[1,1,1],"isVisible":true,"freezeWorldMatrix":false,"isEnabled":true,"checkCollisions":false,"receiveShadows":false,"pickable":true,"tags":""
 ,"positions":[-0.3333,0,-1,-1,0,-0.3333,-0.3333,0,-0.3333,-1,0.5,1,-0.3333,0.5,0.3333,-0.3333,0.5,1,0.3333,0.25,1,1,0,1,0.3333,0,1,-1,0.5,0.3333,-0.3333,0.5,-0.3333,-1,0.5,-0.3333,-0.3333,0.5,-1,-1,0.25,-1,-1,0.25,-0.3333,1,0.5,1,1,0.25,1
 ,-1,0.25,1,-0.3333,0.25,1,0.3333,0.5,0.3333,0.3333,0.5,1,-0.3333,0,1,-1,0,1,1,0.25,-1,0.3333,0,-1,1,0,-1,-1,0.25,0.3333,1,0.25,-0.3333,1,0.5,-1,-1,0,-1,0.3333,0.25,-1,0.3333,0.5,-0.3333,0.3333,0.25,-0.3333,1,0.5,-0.3333
 ,0.3333,0.5,-1,1,0.5,0.3333,1,0.25,0.3333,-1,0,0.3333,-0.3333,0.25,-1,1,0,-0.3333,-0.3333,0.25,0.3333,-0.3333,0.25,-0.3333,-1,0.5,-1,1,0,0.3333,0.3333,0.25,0.3333,-0.3333,0,0.3333,0.3333,0,0.3333,0.3333,0,-0.3333,0.3333,0.25,0.3333,-0.3333,0.25,-0.3333,0.3333,0.25,-0.3333
@@ -21,7 +45,7 @@
 ,25,24,24,0,2,44,19,4,36,27,39,23,28,34,48,49,50,49,51,50,48,52,49,49,53,51]
 ,"subMeshes":[{"materialIndex":0,"verticesStart":0,"verticesCount":48,"indexStart":0,"indexCount":264},{"materialIndex":1,"verticesStart":48,"verticesCount":6,"indexStart":264,"indexCount":12}]
 ,"instances":[]}
-,{"name":"Tile C","id":"Tile C","materialId":"tiles.Multimaterial#1","billboardMode":0,"position":[0,0,-3],"rotation":[0,0,0],"scaling":[1,1,1],"isVisible":true,"freezeWorldMatrix":false,"isEnabled":true,"checkCollisions":false,"receiveShadows":false,"pickable":true,"tags":""
+,{"name":"Tile C","id":"Tile C","materialId":"tiles.Multimaterial#2","billboardMode":0,"position":[0,0,0.9854],"rotation":[0,0,0],"scaling":[1,1,1],"isVisible":true,"freezeWorldMatrix":false,"isEnabled":true,"checkCollisions":false,"receiveShadows":false,"pickable":true,"tags":""
 ,"positions":[-0.3333,0,-1,-1,0,-0.3333,-0.3333,0,-0.3333,1,0.5,-0.3333,0.3333,0.5,-1,1,0.5,-1,1,0.25,-0.3333,1,0.25,-1,-1,0.25,0.3333,-1,0.5,1,-1,0.25,1,-0.3333,0.25,0.3333,-0.3333,0.5,-0.3333,-0.3333,0.25,-0.3333,-1,0.25,-1,-1,0.5,-0.3333,-1,0.25,-0.3333
 ,1,0,0.3333,1,0,-0.3333,1,0.5,1,0.3333,0.5,0.3333,1,0.5,0.3333,1,0,-1,0.3333,0.5,-0.3333,0.3333,0.25,-0.3333,-0.3333,0.25,-1,-1,0.5,-1,-0.3333,0.5,1,-0.3333,0.25,1,1,0.25,1,1,0.25,0.3333,-1,0,0.3333,-1,0,1,0.3333,0.25,-1
 ,-0.3333,0.5,-1,0.3333,0.25,1,-0.3333,0.5,0.3333,-0.3333,0,1,0.3333,0,1,0.3333,0,-1,-1,0.5,0.3333,1,0,1,0.3333,0.25,0.3333,0.3333,0.5,1,-1,0,-1,-0.3333,0,0.3333,0.3333,0,0.3333,0.3333,0,-0.3333,0.3333,0.25,0.3333,-0.3333,0.25,-0.3333,0.3333,0.25,-0.3333
@@ -38,7 +62,7 @@
 ,47,2,18,22,39,39,0,2,48,49,50,51,48,52,53,50,54,48,55,49,51,55,48,53,48,50]
 ,"subMeshes":[{"materialIndex":0,"verticesStart":0,"verticesCount":48,"indexStart":0,"indexCount":258},{"materialIndex":1,"verticesStart":48,"verticesCount":8,"indexStart":258,"indexCount":18}]
 ,"instances":[]}
-,{"name":"Tile B","id":"Tile B","materialId":"tiles.Multimaterial#2","billboardMode":0,"position":[0,0,0.0053],"rotation":[0,0,0],"scaling":[1,1,1],"isVisible":true,"freezeWorldMatrix":false,"isEnabled":true,"checkCollisions":false,"receiveShadows":false,"pickable":true,"tags":""
+,{"name":"Tile B","id":"Tile B","materialId":"tiles.Multimaterial#3","billboardMode":0,"position":[0,0,3.9854],"rotation":[0,0,0],"scaling":[1,1,1],"isVisible":true,"freezeWorldMatrix":false,"isEnabled":true,"checkCollisions":false,"receiveShadows":false,"pickable":true,"tags":""
 ,"positions":[-0.3333,0,-1,-1,0,-0.3333,-0.3333,0,-0.3333,1,0.5,1,0.3333,0.5,0.3333,1,0.5,0.3333,0.3333,0.25,-1,0.3333,0.5,-0.3333,0.3333,0.25,-0.3333,-1,0.25,0.3333,-1,0.5,1,-1,0.25,1,-0.3333,0.25,0.3333,-0.3333,0.5,-0.3333,-0.3333,0.25,-0.3333,-1,0.25,-1,-1,0.5,-0.3333
 ,-1,0.25,-0.3333,1,0,0.3333,1,0.25,-0.3333,1,0,-0.3333,1,0.5,-0.3333,1,0.25,-1,1,0,-1,1,0.25,1,1,0.25,0.3333,-0.3333,0.25,-1,-1,0.5,-1,0.3333,0.25,0.3333,0.3333,0.5,1,0.3333,0.25,1,-1,0,0.3333,-1,0,1,-0.3333,0.5,-1
 ,0.3333,0.5,-1,1,0.5,-1,-0.3333,0.25,1,-0.3333,0.5,0.3333,-0.3333,0,1,0.3333,0,1,0.3333,0,-1,-0.3333,0.5,1,1,0,1,-1,0.5,0.3333,-1,0,-1,-0.3333,0,0.3333,0.3333,0,0.3333,0.3333,0,-0.3333,-0.3333,0.25,-0.3333,0.3333,0.25,-1,0.3333,0.25,-0.3333

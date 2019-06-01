@@ -1,6 +1,6 @@
 import {Engine} from "@babylonjs/core/Engines/engine";
 import {Scene} from "@babylonjs/core/scene";
-import {Color3, Color4, Vector3} from "@babylonjs/core/Maths/math";
+import {Color4, Vector3} from "@babylonjs/core/Maths/math";
 import {ArcRotateCamera} from "@babylonjs/core/Cameras/arcRotateCamera";
 import {Mesh} from "@babylonjs/core/Meshes/mesh";
 import {
@@ -11,7 +11,6 @@ import {
     ShadowGenerator,
     SpotLight,
     Space,
-    StandardMaterial
 } from "@babylonjs/core";
 
 import {AdvancedDynamicTexture, Button} from "@babylonjs/gui";
@@ -27,12 +26,12 @@ export class CanalBuilder {
     readonly engine: Engine;
     readonly scene: Scene;
 
-    private plane: Mesh;
+    private ground: Mesh;
     private camera: ArcRotateCamera;
+    private tiles: Array<any> = [];
 
-    private tileRandomPrototypes: Array<Mesh>;
-    private tilePrototypes: Array<Mesh>;
-    private tiles: Array<any>;
+    private mashes: Map<String, any> = new Map();
+    private tileMashes: Array<Mesh> = [];
 
     private assetsManager: AssetsManager;
     private shadowGenerator: ShadowGenerator;
@@ -40,6 +39,8 @@ export class CanalBuilder {
     private startingPoint: Vector3;
     private currentMesh: AbstractMesh;
     private newTile: AbstractMesh;
+
+    private increase: number = 1;
 
     constructor(id: string) {
         this.canvas = document.getElementById(id) as HTMLCanvasElement;
@@ -50,13 +51,12 @@ export class CanalBuilder {
         this.scene.debugLayer.show();
 
         this.assetsManager = new AssetsManager(this.scene);
-        this.plane = null;
+        this.ground = null;
 
         this.currentMesh = null;
         this.startingPoint = null;
 
-        this.tilePrototypes = [];
-        this.tileRandomPrototypes = [];
+        this.tileMashes = [];
 
         this.tiles = [];
 
@@ -71,7 +71,7 @@ export class CanalBuilder {
     }
 
     public addScene() {
-        this.addPlane();
+        this.addGround();
         this.addButton();
         this.addLights();
         this.addStartGoal();
@@ -89,43 +89,28 @@ export class CanalBuilder {
 
     private loadMesh() {
         let meshTask = this.assetsManager.addMeshTask("meshTask", "", "/assets/", "tiles.babylon");
-
-        this.tilePrototypes = [];
-        this.tileRandomPrototypes = [];
-
         meshTask.onSuccess = (task) => {
             task.loadedMeshes.forEach((mesh) => {
-                if (mesh.name === "Tile D") {
-                    mesh.position = new Vector3(-9, 9, 0);
-                    mesh.rotation = new Vector3(Math.PI / -2, 0, 0);
-                    mesh.isVisible = false;
-                } else {
-                    mesh.position = new Vector3(0, 0, 0);
-                    mesh.rotation = new Vector3(Math.PI / -2, 0, 0);
-                    mesh.isVisible = false;
-                    this.tileRandomPrototypes.push(<Mesh>mesh);
+                mesh.isVisible = false;
+                if (mesh.name === "Tile A" || mesh.name === "Tile B" || mesh.name === "Tile C") {
+                    this.tileMashes.push(<Mesh>mesh);
                 }
-                this.tilePrototypes.push(<Mesh>mesh);
+                this.mashes.set(mesh.name, mesh);
             });
 
             this.addScene();
         };
+
+        this.tileMashes = [];
         this.assetsManager.load();
     }
 
     private addCamera() {
-        this.camera = new ArcRotateCamera("camera", Math.PI * 1.5, 2, 25, new Vector3(0, -2, 0), this.scene);
-        this.camera.lowerAlphaLimit = Math.PI * 1.5;
-        this.camera.upperAlphaLimit = Math.PI * 1.5;
-        this.camera.lowerBetaLimit = 2;
-        this.camera.upperBetaLimit = 2;
-        this.camera.lowerRadiusLimit = 25;
-        this.camera.upperRadiusLimit = 25;
-        this.camera.attachControl(this.canvas, true);
+        this.camera = new ArcRotateCamera("camera", Math.PI * 1.5, 0.5, 25, new Vector3(0, 0, -2), this.scene);
     }
 
     private addLights() {
-        let spotLight = new SpotLight("spotLight", new Vector3(-5, 5, -20), new Vector3(0, -0.25, 1), Math.PI / 2, 2, this.scene);
+        let spotLight = new SpotLight("spotLight", new Vector3(-10, 30, 10), new Vector3(Math.PI / 4, -Math.PI / 2, -Math.PI / 4), Math.PI / 2, 2, this.scene);
         spotLight.intensity = 0.5;
 
         let ambientLight = new HemisphericLight("ambientLight", new Vector3(0, 0, -10), this.scene);
@@ -162,57 +147,49 @@ export class CanalBuilder {
         advancedTexture.addControl(rotateButton);
     }
 
-    private addPlane() {
-        this.plane = Mesh.CreatePlane("plane", 20, this.scene);
-        this.plane.position = Vector3.Zero();
-        this.plane.receiveShadows = true;
-        this.plane.material = this.getMaterial();
+    private addGround() {
+        this.ground = this.mashes.get("Ground");
+        this.ground.position = Vector3.Zero();
+        this.ground.receiveShadows = true;
+        this.ground.isVisible = true;
     }
 
     private addStartGoal() {
-        let tile_d = this.tilePrototypes.find(e => e.name === 'Tile D');
+        let tile_d = this.mashes.get("Tile D");
 
-        let start = tile_d.createInstance("tile_start");
-        start.parent = this.plane;
-        start.position = new Vector3(-9, 9, 0);
-        this.shadowGenerator.getShadowMap().renderList.push(start);
+        let start = tile_d.createInstance("Start");
+        start.parent = this.ground;
+        start.position = new Vector3(-9, 0, 9);
+
         this.tiles.push(start);
 
-        let goal = tile_d.createInstance("tile_goal");
-        goal.parent = this.plane;
-        goal.position = new Vector3(9, -9, 0);
-        goal.rotation = new Vector3(Math.PI / 2, 0, Math.PI);
+        let goal = tile_d.createInstance("Goal");
+        goal.parent = this.ground;
+        goal.position = new Vector3(9, 0, -9);
+        goal.rotate(Axis.Y, Math.PI, Space.WORLD);
         this.shadowGenerator.getShadowMap().renderList.push(goal);
         this.tiles.push(goal);
     }
 
     private getRandomTile() {
-        let tile = this.tileRandomPrototypes[Tools.getRandomIntInclusive(0, 1)].createInstance("tile_" + this.tiles.length);
-        tile.parent = this.plane;
-        tile.position = new Vector3(0, 0, -0.5);
+        let tile = this.tileMashes[Tools.getRandomIntInclusive(0, 2)].createInstance("Tile_" + this.tiles.length);
+        tile.parent = this.ground;
+        tile.position = new Vector3(0, this.increase, 0);
         this.shadowGenerator.getShadowMap().renderList.push(tile);
         this.tiles.push(tile);
         this.newTile = tile;
     }
 
-    private getMaterial() {
-        let material = new StandardMaterial("plane", this.scene);
-        material.diffuseColor = new Color3(0.7, 0.7, 0.7);
-        material.specularColor = new Color3(0.7, 0.7, 0.7);
-        material.ambientColor = new Color3(0, 0, 0);
-        return material;
-    }
-
     private getGroundPosition() {
         let pickInfo = this.scene.pick(this.scene.pointerX, this.scene.pointerY, (mesh) => {
-            return mesh == this.plane;
+            return mesh == this.ground;
         });
 
         if (pickInfo.hit) {
             let position = pickInfo.pickedPoint;
             position.x = Math.round(position.x);
-            position.y = Math.round(position.y);
-            position.z = 0;
+            position.y = 0;
+            position.z = Math.round(position.z);
             return position;
         }
 
@@ -220,7 +197,7 @@ export class CanalBuilder {
     }
 
     private rotateTile() {
-        this.newTile.rotate(Axis.Z, Math.PI / 2, Space.WORLD);
+        this.newTile.rotate(Axis.Y, Math.PI / 2, Space.WORLD);
     }
 
     private onPointerDown(event: PointerEvent) {
@@ -229,25 +206,19 @@ export class CanalBuilder {
         }
 
         let pickInfo = this.scene.pick(this.scene.pointerX, this.scene.pointerY, (mesh) => {
-            return mesh !== this.plane;
+            return mesh !== this.ground;
         });
 
         if (pickInfo.hit) {
             this.startingPoint = this.getGroundPosition();
             this.currentMesh = pickInfo.pickedMesh;
-            this.currentMesh.position.z = -0.5;
-            if (this.startingPoint) {
-                setTimeout(() => {
-                    this.camera.detachControl(this.canvas);
-                }, 0);
-            }
+            this.currentMesh.position.y = this.increase;
         }
     }
 
     private onPointerUp(event: PointerEvent) {
         if (this.startingPoint) {
-            this.camera.attachControl(this.canvas, true);
-            this.currentMesh.position.z = 0;
+            this.currentMesh.position.y = 0;
             this.currentMesh = null;
             this.startingPoint = null;
         }
@@ -264,7 +235,7 @@ export class CanalBuilder {
         let newPosition = current.subtract(this.startingPoint);
 
         this.currentMesh.position.addInPlace(newPosition);
-        this.currentMesh.position.z = -0.5;
+        this.currentMesh.position.y = this.increase;
         this.startingPoint = current;
     }
 }
