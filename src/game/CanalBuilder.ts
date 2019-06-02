@@ -11,7 +11,7 @@ import {
     HemisphericLight,
     ShadowGenerator,
     SpotLight,
-    Space,
+    Space, CircleEase, EasingFunction, SineEase,
 } from "@babylonjs/core";
 
 import {AdvancedDynamicTexture, Button} from "@babylonjs/gui";
@@ -173,8 +173,7 @@ export class CanalBuilder {
     }
 
     private getRandomTile() {
-        let tileAnimation = new Animation("tileAnimation", "position.y", 30, Animation.ANIMATIONTYPE_FLOAT, Animation.ANIMATIONLOOPMODE_CYCLE);
-        tileAnimation.setKeys([{frame: 0, value: 5}, {frame: 5, value: this.increase}]);
+        let tileAnimation = this.getTileAnimation(10, this.increase);
 
         let tile = this.tileMashes[Tools.getRandomIntInclusive(0, 2)].createInstance("Tile_" + this.tiles.length);
         tile.parent = this.ground;
@@ -186,7 +185,7 @@ export class CanalBuilder {
         this.tiles.push(tile);
         this.newTile = tile;
 
-        this.scene.beginAnimation(tile, 0, 5, false);
+        this.scene.beginAnimation(tile, 0, 10, false);
     }
 
     private getGroundPosition() {
@@ -219,29 +218,37 @@ export class CanalBuilder {
         });
 
         if (pickInfo.hit) {
-            let tileAnimation = new Animation("tileAnimation", "position.y", 30, Animation.ANIMATIONTYPE_FLOAT, Animation.ANIMATIONLOOPMODE_CYCLE);
-            tileAnimation.setKeys([{frame: 0, value: 0}, {frame: 4, value: this.increase}]);
+            let tileAnimation = this.getTileAnimation(0, this.increase);
 
             this.startingPoint = this.getGroundPosition();
             this.currentMesh = pickInfo.pickedMesh;
 
             this.currentMesh.animations.push(tileAnimation);
-            this.scene.beginAnimation(this.currentMesh, 0, 4, false);
+            this.scene.beginAnimation(this.currentMesh, 0, 10, false);
         }
     }
 
     private onPointerUp(event: PointerEvent) {
         if (this.startingPoint) {
-
-            let tileAnimation = new Animation("tileAnimation", "position.y", 30, Animation.ANIMATIONTYPE_FLOAT, Animation.ANIMATIONLOOPMODE_CYCLE);
-            tileAnimation.setKeys([{frame: 0, value: this.increase}, {frame: 4, value: 0}]);
+            let tileAnimation = this.getTileAnimation(this.increase, 0);
 
             this.currentMesh.animations.push(tileAnimation);
-            this.scene.beginAnimation(this.currentMesh, 0, 4, false);
+            this.scene.beginAnimation(this.currentMesh, 0, 10, false);
 
             this.currentMesh = null;
             this.startingPoint = null;
         }
+    }
+
+    private getTileAnimation(from: number, to: number) {
+        let easingFunction = new SineEase();
+        easingFunction.setEasingMode(EasingFunction.EASINGMODE_EASEIN);
+
+        let tileAnimation = new Animation("tileAnimation", "position.y", 30, Animation.ANIMATIONTYPE_FLOAT, Animation.ANIMATIONLOOPMODE_CYCLE);
+        tileAnimation.setKeys([{frame: 0, value: from}, {frame: 10, value: to}]);
+        tileAnimation.setEasingFunction(easingFunction);
+
+        return tileAnimation;
     }
 
     private onPointerMove(event: PointerEvent) {
