@@ -1,6 +1,6 @@
 import {Engine} from "@babylonjs/core/Engines/engine";
 import {Scene} from "@babylonjs/core/scene";
-import {Color4, Vector3} from "@babylonjs/core/Maths/math";
+import {Color4, Vector2, Vector3} from "@babylonjs/core/Maths/math";
 import {ArcRotateCamera} from "@babylonjs/core/Cameras/arcRotateCamera";
 import {Mesh} from "@babylonjs/core/Meshes/mesh";
 import {
@@ -11,11 +11,12 @@ import {
     HemisphericLight,
     ShadowGenerator,
     SpotLight,
-    Space, CircleEase, EasingFunction, SineEase,
+    Space, CircleEase, EasingFunction, SineEase, InstancedMesh,
 } from "@babylonjs/core";
 
 import {AdvancedDynamicTexture, Button} from "@babylonjs/gui";
 import {Tools} from "./Tools";
+import {Graph} from "./Graph";
 
 import "@babylonjs/core/Meshes/meshBuilder";
 import "@babylonjs/core/Debug/debugLayer";
@@ -26,6 +27,8 @@ export class CanalBuilder {
     readonly canvas: HTMLCanvasElement;
     readonly engine: Engine;
     readonly scene: Scene;
+
+    private graph: Graph;
 
     private ground: Mesh;
     private camera: ArcRotateCamera;
@@ -60,6 +63,7 @@ export class CanalBuilder {
         this.tileMashes = [];
 
         this.tiles = [];
+        this.graph = new Graph();
 
         this.canvas.addEventListener("pointerdown", (event: PointerEvent) => this.onPointerDown(event), false);
         this.canvas.addEventListener("pointerup", (event: PointerEvent) => this.onPointerUp(event), false);
@@ -93,7 +97,10 @@ export class CanalBuilder {
         meshTask.onSuccess = (task) => {
             task.loadedMeshes.forEach((mesh) => {
                 mesh.isVisible = false;
-                if (mesh.name === "Tile A" || mesh.name === "Tile B" || mesh.name === "Tile C") {
+
+                console.log(mesh.name);
+
+                if (mesh.name === "Tile_A" || mesh.name === "Tile_B" || mesh.name === "Tile_C") {
                     this.tileMashes.push(<Mesh>mesh);
                 }
                 this.mashes.set(mesh.name, mesh);
@@ -156,7 +163,7 @@ export class CanalBuilder {
     }
 
     private addStartGoal() {
-        let tile_d = this.mashes.get("Tile D");
+        let tile_d = this.mashes.get("Tile_D");
 
         let start = tile_d.createInstance("Start");
         start.parent = this.ground;
@@ -174,8 +181,8 @@ export class CanalBuilder {
 
     private getRandomTile() {
         let tileAnimation = this.getTileAnimation(10, this.increase);
-
-        let tile = this.tileMashes[Tools.getRandomIntInclusive(0, 2)].createInstance("Tile_" + this.tiles.length);
+        let randomTile = this.tileMashes[Tools.getRandomIntInclusive(0, 2)];
+        let tile: InstancedMesh = randomTile.createInstance(randomTile.name + '.' + this.tiles.length);
         tile.parent = this.ground;
         tile.position = new Vector3(0, 0, 0);
         tile.animations = [];
@@ -186,6 +193,17 @@ export class CanalBuilder {
         this.newTile = tile;
 
         this.scene.beginAnimation(tile, 0, 10, false);
+    }
+
+    private getTileAnimation(from: number, to: number) {
+        let easingFunction = new SineEase();
+        easingFunction.setEasingMode(EasingFunction.EASINGMODE_EASEIN);
+
+        let tileAnimation = new Animation("tileAnimation", "position.y", 30, Animation.ANIMATIONTYPE_FLOAT, Animation.ANIMATIONLOOPMODE_CYCLE);
+        tileAnimation.setKeys([{frame: 0, value: from}, {frame: 10, value: to}]);
+        tileAnimation.setEasingFunction(easingFunction);
+
+        return tileAnimation;
     }
 
     private getGroundPosition() {
@@ -222,8 +240,8 @@ export class CanalBuilder {
 
             this.startingPoint = this.getGroundPosition();
             this.currentMesh = pickInfo.pickedMesh;
-
             this.currentMesh.animations.push(tileAnimation);
+
             this.scene.beginAnimation(this.currentMesh, 0, 10, false);
         }
     }
@@ -235,20 +253,11 @@ export class CanalBuilder {
             this.currentMesh.animations.push(tileAnimation);
             this.scene.beginAnimation(this.currentMesh, 0, 10, false);
 
+            this.graph.buildGraph(this.ground, new Vector2(20, 20));
+
             this.currentMesh = null;
             this.startingPoint = null;
         }
-    }
-
-    private getTileAnimation(from: number, to: number) {
-        let easingFunction = new SineEase();
-        easingFunction.setEasingMode(EasingFunction.EASINGMODE_EASEIN);
-
-        let tileAnimation = new Animation("tileAnimation", "position.y", 30, Animation.ANIMATIONTYPE_FLOAT, Animation.ANIMATIONLOOPMODE_CYCLE);
-        tileAnimation.setKeys([{frame: 0, value: from}, {frame: 10, value: to}]);
-        tileAnimation.setEasingFunction(easingFunction);
-
-        return tileAnimation;
     }
 
     private onPointerMove(event: PointerEvent) {

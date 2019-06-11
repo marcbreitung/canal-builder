@@ -5,7 +5,7 @@
 {"name":"tiles.Ground","id":"tiles.Ground","ambient":[0.8,0.8,0.8],"diffuse":[0.64,0.64,0.64],"specular":[0,0,0],"emissive":[0,0,0],"specularPower":1,"alpha":1,"backFaceCulling":true,"checkReadyOnlyOnce":false,"maxSimultaneousLights":4}],
 "multiMaterials":[{"name":"tiles.Multimaterial#0","id":"tiles.Multimaterial#0","materials":["tiles.Ground.001","tiles.Water"]},{"name":"tiles.Multimaterial#1","id":"tiles.Multimaterial#1","materials":["tiles.Ground.001","tiles.Water"]},{"name":"tiles.Multimaterial#2","id":"tiles.Multimaterial#2","materials":["tiles.Ground.001","tiles.Water"]},{"name":"tiles.Multimaterial#3","id":"tiles.Multimaterial#3","materials":["tiles.Ground.001","tiles.Water"]}],
 "skeletons":[],
-"meshes":[{"name":"Tile A","id":"Tile A","materialId":"tiles.Multimaterial#0","billboardMode":0,"position":[0,0,-2],"rotation":[0,0,0],"scaling":[1,1,1],"isVisible":true,"freezeWorldMatrix":false,"isEnabled":true,"checkCollisions":false,"receiveShadows":false,"pickable":true,"tags":""
+"meshes":[{"name":"Tile_A","id":"Tile_A","materialId":"tiles.Multimaterial#0","billboardMode":0,"position":[0,0,-2],"rotation":[0,0,0],"scaling":[1,1,1],"isVisible":true,"freezeWorldMatrix":false,"isEnabled":true,"checkCollisions":false,"receiveShadows":false,"pickable":true,"tags":""
 ,"positions":[-0.3333,0,-1,-1,0,-0.3333,-0.3333,0,-0.3333,1,0.5,-0.3333,1,0.25,-1,1,0.25,-0.3333,-1,0.5,1,-0.3333,0.5,0.3333,-0.3333,0.5,1,-1,0.25,-1,-1,0,-1,0.3333,0.5,-1,1,0.5,-1,-1,0.5,-0.3333,-0.3333,0.5,-1,-0.3333,0.5,-0.3333,0.3333,0.5,1
 ,1,0.25,1,0.3333,0.25,1,0.3333,0.25,-0.3333,0.3333,0.25,-1,-0.3333,0.25,1,-1,0.25,1,0.3333,0,-1,0.3333,0,1,-0.3333,0,1,1,0,0.3333,1,0,1,-1,0.25,0.3333,-1,0.25,-0.3333,-0.3333,0.25,-0.3333,-0.3333,0.25,0.3333,0.3333,0.5,0.3333,0.3333,0.25,0.3333
 ,-1,0,1,-1,0,0.3333,1,0.25,0.3333,1,0,-0.3333,-1,0.5,-1,1,0.5,1,1,0.5,0.3333,-1,0.5,0.3333,1,0,-1,-0.3333,0.25,-1,0.3333,0.5,-0.3333,-0.3333,0,0.3333,0.3333,0,0.3333,0.3333,0,-0.3333,-0.3333,0.25,1,0.3333,0.25,0.3333,0.3333,0.25,1
@@ -28,7 +28,7 @@
 ,"indices":[0,1,2,3,4,1,5,6,4,7,2,6,4,2,1,3,7,5,0,3,1,3,5,4,5,7,6,7,0,2,4,6,2,3,0,7]
 ,"subMeshes":[{"materialIndex":0,"verticesStart":0,"verticesCount":8,"indexStart":0,"indexCount":36}]
 ,"instances":[]}
-,{"name":"Tile D","id":"Tile D","materialId":"tiles.Multimaterial#1","billboardMode":0,"position":[0,0,7],"rotation":[0,0,0],"scaling":[1,1,1],"isVisible":true,"freezeWorldMatrix":false,"isEnabled":true,"checkCollisions":false,"receiveShadows":false,"pickable":true,"tags":""
+,{"name":"Tile_D","id":"Tile_D","materialId":"tiles.Multimaterial#1","billboardMode":0,"position":[0,0,7],"rotation":[0,0,0],"scaling":[1,1,1],"isVisible":true,"freezeWorldMatrix":false,"isEnabled":true,"checkCollisions":false,"receiveShadows":false,"pickable":true,"tags":""
 ,"positions":[-0.3333,0,-1,-1,0,-0.3333,-0.3333,0,-0.3333,-1,0.5,1,-0.3333,0.5,0.3333,-0.3333,0.5,1,0.3333,0.25,1,1,0,1,0.3333,0,1,-1,0.5,0.3333,-0.3333,0.5,-0.3333,-1,0.5,-0.3333,-0.3333,0.5,-1,-1,0.25,-1,-1,0.25,-0.3333,1,0.5,1,1,0.25,1
 ,-1,0.25,1,-0.3333,0.25,1,0.3333,0.5,0.3333,0.3333,0.5,1,-0.3333,0,1,-1,0,1,1,0.25,-1,0.3333,0,-1,1,0,-1,-1,0.25,0.3333,1,0.25,-0.3333,1,0.5,-1,-1,0,-1,0.3333,0.25,-1,0.3333,0.5,-0.3333,0.3333,0.25,-0.3333,1,0.5,-0.3333
 ,0.3333,0.5,-1,1,0.5,0.3333,1,0.25,0.3333,-1,0,0.3333,-0.3333,0.25,-1,1,0,-0.3333,-0.3333,0.25,0.3333,-0.3333,0.25,-0.3333,-1,0.5,-1,1,0,0.3333,0.3333,0.25,0.3333,-0.3333,0,0.3333,0.3333,0,0.3333,0.3333,0,-0.3333,0.3333,0.25,0.3333,-0.3333,0.25,-0.3333,0.3333,0.25,-0.3333
@@ -45,7 +45,7 @@
 ,25,24,24,0,2,44,19,4,36,27,39,23,28,34,48,49,50,49,51,50,48,52,49,49,53,51]
 ,"subMeshes":[{"materialIndex":0,"verticesStart":0,"verticesCount":48,"indexStart":0,"indexCount":264},{"materialIndex":1,"verticesStart":48,"verticesCount":6,"indexStart":264,"indexCount":12}]
 ,"instances":[]}
-,{"name":"Tile C","id":"Tile C","materialId":"tiles.Multimaterial#2","billboardMode":0,"position":[0,0,0.9854],"rotation":[0,0,0],"scaling":[1,1,1],"isVisible":true,"freezeWorldMatrix":false,"isEnabled":true,"checkCollisions":false,"receiveShadows":false,"pickable":true,"tags":""
+,{"name":"Tile_C","id":"Tile_C","materialId":"tiles.Multimaterial#2","billboardMode":0,"position":[0,0,0.9854],"rotation":[0,0,0],"scaling":[1,1,1],"isVisible":true,"freezeWorldMatrix":false,"isEnabled":true,"checkCollisions":false,"receiveShadows":false,"pickable":true,"tags":""
 ,"positions":[-0.3333,0,-1,-1,0,-0.3333,-0.3333,0,-0.3333,1,0.5,-0.3333,0.3333,0.5,-1,1,0.5,-1,1,0.25,-0.3333,1,0.25,-1,-1,0.25,0.3333,-1,0.5,1,-1,0.25,1,-0.3333,0.25,0.3333,-0.3333,0.5,-0.3333,-0.3333,0.25,-0.3333,-1,0.25,-1,-1,0.5,-0.3333,-1,0.25,-0.3333
 ,1,0,0.3333,1,0,-0.3333,1,0.5,1,0.3333,0.5,0.3333,1,0.5,0.3333,1,0,-1,0.3333,0.5,-0.3333,0.3333,0.25,-0.3333,-0.3333,0.25,-1,-1,0.5,-1,-0.3333,0.5,1,-0.3333,0.25,1,1,0.25,1,1,0.25,0.3333,-1,0,0.3333,-1,0,1,0.3333,0.25,-1
 ,-0.3333,0.5,-1,0.3333,0.25,1,-0.3333,0.5,0.3333,-0.3333,0,1,0.3333,0,1,0.3333,0,-1,-1,0.5,0.3333,1,0,1,0.3333,0.25,0.3333,0.3333,0.5,1,-1,0,-1,-0.3333,0,0.3333,0.3333,0,0.3333,0.3333,0,-0.3333,0.3333,0.25,0.3333,-0.3333,0.25,-0.3333,0.3333,0.25,-0.3333
@@ -62,7 +62,7 @@
 ,47,2,18,22,39,39,0,2,48,49,50,51,48,52,53,50,54,48,55,49,51,55,48,53,48,50]
 ,"subMeshes":[{"materialIndex":0,"verticesStart":0,"verticesCount":48,"indexStart":0,"indexCount":258},{"materialIndex":1,"verticesStart":48,"verticesCount":8,"indexStart":258,"indexCount":18}]
 ,"instances":[]}
-,{"name":"Tile B","id":"Tile B","materialId":"tiles.Multimaterial#3","billboardMode":0,"position":[0,0,3.9854],"rotation":[0,0,0],"scaling":[1,1,1],"isVisible":true,"freezeWorldMatrix":false,"isEnabled":true,"checkCollisions":false,"receiveShadows":false,"pickable":true,"tags":""
+,{"name":"Tile_B","id":"Tile_B","materialId":"tiles.Multimaterial#3","billboardMode":0,"position":[0,0,3.9854],"rotation":[0,0,0],"scaling":[1,1,1],"isVisible":true,"freezeWorldMatrix":false,"isEnabled":true,"checkCollisions":false,"receiveShadows":false,"pickable":true,"tags":""
 ,"positions":[-0.3333,0,-1,-1,0,-0.3333,-0.3333,0,-0.3333,1,0.5,1,0.3333,0.5,0.3333,1,0.5,0.3333,0.3333,0.25,-1,0.3333,0.5,-0.3333,0.3333,0.25,-0.3333,-1,0.25,0.3333,-1,0.5,1,-1,0.25,1,-0.3333,0.25,0.3333,-0.3333,0.5,-0.3333,-0.3333,0.25,-0.3333,-1,0.25,-1,-1,0.5,-0.3333
 ,-1,0.25,-0.3333,1,0,0.3333,1,0.25,-0.3333,1,0,-0.3333,1,0.5,-0.3333,1,0.25,-1,1,0,-1,1,0.25,1,1,0.25,0.3333,-0.3333,0.25,-1,-1,0.5,-1,0.3333,0.25,0.3333,0.3333,0.5,1,0.3333,0.25,1,-1,0,0.3333,-1,0,1,-0.3333,0.5,-1
 ,0.3333,0.5,-1,1,0.5,-1,-0.3333,0.25,1,-0.3333,0.5,0.3333,-0.3333,0,1,0.3333,0,1,0.3333,0,-1,-0.3333,0.5,1,1,0,1,-1,0.5,0.3333,-1,0,-1,-0.3333,0,0.3333,0.3333,0,0.3333,0.3333,0,-0.3333,-0.3333,0.25,-0.3333,0.3333,0.25,-1,0.3333,0.25,-0.3333
